@@ -24,12 +24,13 @@ public class teste{
             a = m.start();       
         }
         System.out.println(str.charAt(a));
-        m = p.matcher(str);
         pattern = "[)]";
+        p = Pattern.compile(pattern);
+        m = p.matcher(str);
         while(m.find()){
             b = m.start();       
         }
-        System.out.println(str.charAt(a+1));
+        System.out.println(str.charAt(b));
        // int n = Integer.parseInt(""+str.charAt(b+1));
         //System.out.println(n);
         for(int i = a; i < b; i++){
