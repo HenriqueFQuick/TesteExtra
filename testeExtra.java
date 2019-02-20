@@ -28,7 +28,15 @@ public class testeExtra{
         System.out.print(str + "                      ");
         str = b(str);
         System.out.println(str);
+        escrever(str, nome_saida);
+
     }//end organizador
+
+    public static void escrever(String str, String nome_saida)throws Exception{
+        BufferedWriter BW = new BufferedWriter(new FileWriter(nome_saida));
+        Bw.write(str);
+        BW.close();
+    }//end escrever
 
 
     public static String lerString(String nome_leitura) throws Exception{
