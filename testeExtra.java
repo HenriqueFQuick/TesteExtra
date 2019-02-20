@@ -27,10 +27,8 @@ public class testeExtra{
 
     //metodo para a chamada de metodos 
     public static void organizador(String nome_leitura, String nome_saida) throws Exception{
-        String str = lerString(nome_leitura);    
-        System.out.print(str+ "                      ");                                                    //metodo para ler a string(formula) dada de uma arquivo
-        str = redirecionador(str);    
-        System.out.println(str);                                                               //metodo para redirecionar a partir da existencia ou nao de (), [] ou {}
+        String str = lerString(nome_leitura);                                                       //metodo para ler a string(formula) dada de uma arquivo
+        str = redirecionador(str);                                                            //metodo para redirecionar a partir da existencia ou nao de (), [] ou {}
         str = mudarString(str);
         escrever(str, nome_saida);
 
@@ -55,7 +53,6 @@ public class testeExtra{
                 }
                 int aux = Integer.parseInt(numero);
 
-                System.out.println(elemento + " " + aux);
 
                 boolean achou = false;
                 int j = 0;
@@ -79,14 +76,38 @@ public class testeExtra{
             ret += ""+a[j];
         }
 
-        System.out.println(ret);
         return ret;
     }//end mudarString
 
+    //C: 1, O: 2 
+    public static String formatar(String str){
+        String str2 = "";
+        for(int i = 0; i < str.length(); i++){
+            if((str.charAt(i) >= 65 && str.charAt(i) <= 90) ){
+                if((i+1)< str.length() && (str.charAt(i+1) >= 97 && str.charAt(i+1) <= 122)){
+                    str2 += str.charAt(i) +""+ str.charAt(i+1);
+                    i++;
+                }else{ str2 += str.charAt(i); }
+            }else if((i+1)< str.length() && (str.charAt(i+1) >= 48 && str.charAt(i+1) <= 57)){
+                    str2 += ": " + str.charAt(i) +""+ str.charAt(i+1) + ", ";
+                    i++;
+                }else{  str2 += (": " + str.charAt(i) + ", ");}
+        }
+        return a(str2);
+    }//end formatar
+
+    public static String a(String str){
+        String str2 = "";
+        for(int i = 0; i < str.length()-2; i++){
+            str2 += str.charAt(i);
+        }
+    return str2;
+    }
 
     //método para escrever no arquivo a string ja formatada
     public static void escrever(String str, String nome_saida)throws Exception{
         BufferedWriter BW = new BufferedWriter(new FileWriter(nome_saida));                           //abrir/criar arquivo
+        str = formatar(str);
         BW.write(str);                                                                                //escrever a string no arquivo 
         BW.close();                                                                                   //fechar arquivo
     }//end escrever
@@ -151,9 +172,14 @@ public class testeExtra{
                     elemento += str.charAt(i);
                 }//end else
             }//end for
-            
-            elemento = replace(elemento, '(', ')');
-            return elemento;     
+            String str3 = "";
+            for(int i = 0; i < elemento.length(); i++){
+                if(!(i == (b+1))){
+                    str3 += elemento.charAt(i);
+                }
+            }
+            str3 = replace(str3, '(', ')');
+            return str3;     
     }//end verificar
 
 
@@ -168,8 +194,14 @@ public class testeExtra{
                 elemento += (Integer.parseInt(""+str.charAt(i)) * n);     
             }else elemento += str.charAt(i);
         }//end for
-        elemento = replace(elemento, '{', '}');
-        return elemento;     
+        String str3 = "";
+        for(int i = 0; i < elemento.length(); i++){
+                if(!(i == (b+1))){
+                    str3 += elemento.charAt(i);
+                }
+            }
+            str3 = replace(str3, '{', '}');
+            return str3;     
     }//end verificar
 
 
@@ -187,8 +219,14 @@ public class testeExtra{
                 }else elemento += (Integer.parseInt(""+str.charAt(i)) * n); 
             }else elemento += str.charAt(i);
         }//end for
-        elemento = replace(elemento, '[', ']');
-        return elemento;     
+        String str3 = "";
+        for(int i = 0; i < elemento.length(); i++){
+                if(!(i == (b+1))){
+                    str3 += elemento.charAt(i);
+                }
+            }
+            str3 = replace(str3, '[', ']');
+            return str3;    
     }//end verificar
 
 }//end testeExtra
