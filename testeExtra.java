@@ -27,7 +27,7 @@ public class testeExtra{
 
     //metodo para a chamada de metodos 
     public static void organizador(String nome_leitura, String nome_saida) throws Exception{
-        String str = lerString(nome_leitura);                                                       //metodo para ler a string(formula) dada de uma arquivo
+        String str = lerString(nome_leitura);                                                 //metodo para ler a string(formula) dada de uma arquivo
         str = redirecionador(str);                                                            //metodo para redirecionar a partir da existencia ou nao de (), [] ou {}
         str = mudarString(str);
         escrever(str, nome_saida);
@@ -37,8 +37,7 @@ public class testeExtra{
 
     public static String mudarString(String str){
         String[] chvetor = new String[str.length()];
-        String elemento = "";
-        String numero = "";
+        String elemento = "", numero = "";
         int[] a  = new int[str.length()];
         for(int i = 0; i < str.length(); i++){
             elemento = "";
@@ -46,13 +45,12 @@ public class testeExtra{
                 while(!(str.charAt(i) >= 48 && str.charAt(i) <= 57)){
                     elemento += str.charAt(i);
                     i++;
-                }
+                }//end while
                 while(i < str.length() && str.charAt(i) >= 48 && str.charAt(i) <= 57){
                     numero += str.charAt(i);
                     i++;
-                }
+                }//end while
                 int aux = Integer.parseInt(numero);
-
 
                 boolean achou = false;
                 int j = 0;
@@ -60,26 +58,26 @@ public class testeExtra{
                     if(chvetor[j].equals(elemento)){
                         achou = true;
                         break;
-                    }
-                }
+                    }//end if
+                }//end for
 
                 if(!achou) chvetor[j] = elemento;
 
                 a[j] += aux;
 
                 i--;
-        }
+        }//end for
 
         String ret = "";
         for(int j = 0; j < chvetor.length && chvetor[j] != null; j++){
             ret += chvetor[j];
             ret += ""+a[j];
-        }
+        }//end for
 
         return ret;
     }//end mudarString
 
-    //C: 1, O: 2 
+    
     public static String formatar(String str){
         String str2 = "";
         for(int i = 0; i < str.length(); i++){
@@ -92,17 +90,17 @@ public class testeExtra{
                     str2 += ": " + str.charAt(i) +""+ str.charAt(i+1) + ", ";
                     i++;
                 }else{  str2 += (": " + str.charAt(i) + ", ");}
-        }
-        return a(str2);
+        }//end for
+        return stringCorreta(str2);
     }//end formatar
 
-    public static String a(String str){
+    public static String stringCorreta(String str){
         String str2 = "";
         for(int i = 0; i < str.length()-2; i++){
             str2 += str.charAt(i);
-        }
+        }//end for
     return str2;
-    }
+    }//end stringCorreta
 
     //método para escrever no arquivo a string ja formatada
     public static void escrever(String str, String nome_saida)throws Exception{
@@ -123,6 +121,7 @@ public class testeExtra{
                 elemento += str.charAt(i) + "1";
             }else elemento += str.charAt(i);
         }//end for
+        BR.close();
         return elemento;                                                                                  //retornar a string ja formatada com todos os valores 1's
     }//end lerString
 
@@ -162,7 +161,7 @@ public class testeExtra{
 
     //metodo para realizar a multiplicacao dentro de parentesis
     public static String multiplicaParentesis(String str)throws Exception{
-            String elemento = "";
+            String elemento = "", str3 = "";
             int a = posPattern(str, "\\("), b = posPattern(str, "\\)");
             int n = Integer.parseInt(""+str.charAt(b+1));
             for(int i = 0; i < str.length(); i++){
@@ -172,14 +171,12 @@ public class testeExtra{
                     elemento += str.charAt(i);
                 }//end else
             }//end for
-            String str3 = "";
             for(int i = 0; i < elemento.length(); i++){
                 if(!(i == (b+1))){
                     str3 += elemento.charAt(i);
                 }
             }
-            str3 = replace(str3, '(', ')');
-            return str3;     
+            return replace(str3, '(', ')');     
     }//end verificar
 
 
