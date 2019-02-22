@@ -1,3 +1,6 @@
+/*
+Autor: Henrique Fernandes Viana Mendes
+*/
 import java.util.regex.*;
 import java.io.*;
 public class testeExtra{
@@ -122,7 +125,7 @@ public class testeExtra{
             }else elemento += str.charAt(i);
         }//end for
         BR.close();
-        return elemento;                                                                                  //retornar a string ja formatada com todos os valores 1's
+        return elemento;                                                                               //retornar a string ja formatada com todos os valores 1's
     }//end lerString
 
     
@@ -165,18 +168,19 @@ public class testeExtra{
             int a = posPattern(str, "\\("), b = posPattern(str, "\\)");
             int n = Integer.parseInt(""+str.charAt(b+1));
             for(int i = 0; i < str.length(); i++){
-                if((str.charAt(i) >= 48 && str.charAt(i) <= 57) && (i > a) && (i < b)){
-                    elemento += (Integer.parseInt(""+str.charAt(i)) * n);     
-                }else{
-                    elemento += str.charAt(i);
-                }//end else
-            }//end for
-            for(int i = 0; i < elemento.length(); i++){
                 if(!(i == (b+1))){
-                    str3 += elemento.charAt(i);
+                    str3 += str.charAt(i);
                 }//end if
             }//end for
-            return replace(str3, '(', ')');     
+            for(int i = 0; i < str3.length(); i++){
+                if((str3.charAt(i) >= 48 && str3.charAt(i) <= 57) && (i > a) && (i < b)){
+                    elemento += (Integer.parseInt(""+str3.charAt(i)) * n);  
+                }else{
+                    elemento += str3.charAt(i);
+                }//end else
+            }//end for
+            
+            return replace(elemento, '(', ')');     
     }//end verificar
 
 
@@ -205,25 +209,23 @@ public class testeExtra{
     //metodo para realizar a multiplicacao dentro de colchetes
     public static String multiplicaColchetes(String str)throws Exception{
         str = multiplicaParentesis(str);
-        String elemento = "";
+        String elemento = "", str3 = "";
         int a = posPattern(str, "\\["), b = posPattern(str, "\\]");
         int n = Integer.parseInt(""+str.charAt(b+1));
         for(int i = 0; i < str.length(); i++){
-            if((str.charAt(i) >= 48 && str.charAt(i) <= 57) && (i > a) && (i < b)){
-                if((str.charAt(i+1) >= 48) && (str.charAt(i+1) <= 57)){
-                    elemento += ((Integer.parseInt(""+str.charAt(i)) * 10 * n) + (Integer.parseInt(""+str.charAt(i+1)) * n));
+            if(!(i == (b+1))){
+                str3 += str.charAt(i);
+            }//end if
+        }//end for
+        for(int i = 0; i < str3.length(); i++){
+            if((str3.charAt(i) >= 48 && str3.charAt(i) <= 57) && (i > a) && (i < b)){
+                if((str3.charAt(i+1) >= 48) && (str3.charAt(i+1) <= 57)){
+                    elemento += ((Integer.parseInt(""+str3.charAt(i)) * 10 * n) + (Integer.parseInt(""+str3.charAt(i+1)) * n));
                     i++;
-                }else elemento += (Integer.parseInt(""+str.charAt(i)) * n); 
-            }else elemento += str.charAt(i);
+                }else elemento += (Integer.parseInt(""+str3.charAt(i)) * n); 
+            }else elemento += str3.charAt(i);
         }//end for
-        String str3 = "";
-        for(int i = 0; i < elemento.length(); i++){
-                if(!(i == (b+1))){
-                    str3 += elemento.charAt(i);
-                }//end if
-        }//end for
-            str3 = replace(str3, '[', ']');
-            return str3;    
+            return replace(elemento, '[', ']');   
     }//end verificar
 
 }//end testeExtra
