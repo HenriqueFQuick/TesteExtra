@@ -133,7 +133,7 @@ public class testeExtra{
         Matcher m = p.matcher(str);
         while(m.find()){
             a  = m.start();
-        }
+        }//end while
         return a;
     }//end posPattern
 
@@ -174,8 +174,8 @@ public class testeExtra{
             for(int i = 0; i < elemento.length(); i++){
                 if(!(i == (b+1))){
                     str3 += elemento.charAt(i);
-                }
-            }
+                }//end if
+            }//end for
             return replace(str3, '(', ')');     
     }//end verificar
 
@@ -195,8 +195,8 @@ public class testeExtra{
         for(int i = 0; i < elemento.length(); i++){
                 if(!(i == (b+1))){
                     str3 += elemento.charAt(i);
-                }
-            }
+                }//end if
+        }//end for
             str3 = replace(str3, '{', '}');
             return str3;     
     }//end verificar
@@ -220,8 +220,8 @@ public class testeExtra{
         for(int i = 0; i < elemento.length(); i++){
                 if(!(i == (b+1))){
                     str3 += elemento.charAt(i);
-                }
-            }
+                }//end if
+        }//end for
             str3 = replace(str3, '[', ']');
             return str3;    
     }//end verificar
